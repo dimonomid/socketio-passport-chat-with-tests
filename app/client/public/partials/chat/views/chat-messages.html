@@ -1,5 +1,10 @@
 
-<div ng-repeat="message in messages">
-  {{ message.user.username }}: {{ message.text }}
+<div scroll-glue class="chat-messages-list">
+  <ul>
+    <li ng-repeat="message in messages">
+      {{ message.user.username }}: {{ message.text }}
+    </li>
+  </ul>
 </div>
+
 

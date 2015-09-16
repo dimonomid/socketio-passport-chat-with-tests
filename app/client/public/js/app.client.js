@@ -8,6 +8,7 @@
     'chat',
     'ngMessages',
     'ngAnimate',
+    'luegg.directives'
   ]);
   angular.module('users', ['ngResource', 'ngCookies']);
   angular.module('ksocket', []);
