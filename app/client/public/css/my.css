@@ -4,3 +4,8 @@
   overflow-y: scroll;
 }
 
+.my-hint {
+  font-size: 85%;
+  color: green;
+}
+

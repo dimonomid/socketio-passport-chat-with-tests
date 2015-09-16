@@ -17,7 +17,8 @@ var config = require(appRoot + '/config/app.server.config');
 var db = require(appRoot + '/config/mongoose.server.config').db;
 var server = require(appRoot + '/config/express.server.config').server;
 
-
+//-- seed database with test users
+require(appRoot + '/config/mongoose_test_data.server.config').seed();
 
 
 
