@@ -67,6 +67,18 @@
         authCheck: resolveIfAuthenticated
       }
     })
+    .state('chat.logout', {
+      url: '/logout',
+      views: {
+        chat: {
+          templateUrl: 'partials/chat/views/chat-messages.html',
+          controller: 'ChatMessagesController as vm',
+        },
+        control: {
+          controller: 'LogoutController as vm'
+        },
+      },
+    })
 
     .state('logout', {
       url: '/logout',

@@ -1,1 +1,61 @@
-chat-login TODO
+<h1>Login</h1>
+<hr/>
+
+<form name="loginForm" ng-submit="vm.submit()" class="form">
+
+   <div class="alert alert-error" ng-if="vm.wrongLogin">
+      <p>Username or password is not correct</p>
+   </div>
+
+   <div class="form-group">
+      <label for="usernameField">Username</label>
+
+      <input
+            type="text"
+            name="usernameField"
+            id="usernameField"
+            ng-model="vm.username"
+            placeholder="username"
+            class="form-control"
+            autofocus
+            required>
+
+      <div  ng-messages="loginForm.usernameField.$error"
+            ng-if="loginForm.usernameField.$touched"
+            class="text-error">
+
+         <div ng-message="required">This field is required</div>
+      </div>
+   </div>
+
+   <div class="form-group">
+      <label for="passwordField">Password</label>
+
+      <input
+            type="password"
+            name="passwordField"
+            id="passwordField"
+            ng-model="vm.password"
+            placeholder="password"
+            class="form-control"
+            required
+            >
+
+      <div  ng-messages="loginForm.passwordField.$error"
+            ng-if="loginForm.passwordField.$touched"
+            class="text-error"
+            >
+
+         <div ng-message="required">This field is required</div>
+      </div>
+   </div>
+
+   <div class="form-group">
+      <button
+            type="submit"
+            class="btn btn-primary"
+            ng-disabled="loginForm.$invalid">
+         submit
+      </button>
+   </div>
+</form>

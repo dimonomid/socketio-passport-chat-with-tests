@@ -1,1 +1,17 @@
 chat-post TODO
+
+<form name="loginForm" ng-submit="vm.sendMessage()" class="form">
+
+  <input
+      type="text"
+      class="form-control input-normal"
+      ng-model="vm.newMessageText"
+      ng-disabled="vm.isSendingMessage"
+    />
+
+</form>
+
+
+
+<a ui-sref="chat.logout">logout</a>
+
