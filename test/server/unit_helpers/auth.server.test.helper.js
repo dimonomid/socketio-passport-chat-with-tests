@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports.agentLogin = function(agent, username, password, callback, cbData) {
-  it('Should log in', function(done){
+  it('Should log in as ' + username, function(done){
     agent
     .post('/api/login')
     .send(

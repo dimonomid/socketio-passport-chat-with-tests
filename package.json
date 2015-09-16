@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "node -e 'process.env.NODE_ENV = process.env.NODE_ENV || \"production\"; require(\"./app/server/server.js\");'",
-    "test": "NODE_ENV=test mocha --reporter spec test/server/unit/** && karma start test/client/karma.conf.js",
+    "test": "NODE_ENV=test mocha --reporter spec test/server/unit/**",
     "karma": "karma start test/client/karma.conf.js"
   }
 }

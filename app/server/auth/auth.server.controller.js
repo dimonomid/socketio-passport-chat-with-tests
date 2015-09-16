@@ -211,16 +211,6 @@
     socketsBySid.forEach(function(socket) {
       socket.disconnect();
     });
-
-    //-- for debug purposes, check that we've got exactly one socket
-    if (socketsBySid.length !== 1){
-      console.warn(
-        "filterSocketsBySid returned unexpected number of sockets:",
-        socketsBySid.length,
-        "for this sid:",
-        sid
-      );
-    }
   }
 
 
