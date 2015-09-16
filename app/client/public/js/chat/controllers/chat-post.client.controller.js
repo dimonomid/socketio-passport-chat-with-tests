@@ -63,7 +63,6 @@
      */
     function onMessageSent(message) {
       vm.newMessageText = '';
-      vm.fileSelCtrl.reset();
     }
 
     /**

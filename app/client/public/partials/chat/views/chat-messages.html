@@ -1,1 +1,6 @@
 chat-messages TODO
+
+<div ng-repeat="message in vm.messages">
+  {{ message.user.username }}: {{ message.text }}
+</div>
+

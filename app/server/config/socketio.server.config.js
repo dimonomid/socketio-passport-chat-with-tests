@@ -9,6 +9,7 @@
   var cookieParser  = require('cookie-parser');
   var passport = require(appRoot + '/config/passport.server.config');
   var passportSocketIo = require('passport.socketio');
+  var chatController = require(appRoot + '/chat/chat.server.controller');
 
 
   module.exports = function(server, io, mongoStore) {
@@ -51,8 +52,7 @@
       debug('connection event fired, user: ', socket.request.user);
 
       //-- take care of feed connection
-      //TODO: chatController
-      //feedController.clientConnect(io, socket);
+      chatController.clientConnect(io, socket);
 
     });
   };
