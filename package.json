@@ -1,6 +1,6 @@
 {
-  "name": "kamishy_mean",
-  "description": "kamishy_mean",
+  "name": "socket.io-passport-example",
+  "description": "socket.io-passport-example",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
