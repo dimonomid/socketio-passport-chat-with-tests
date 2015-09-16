@@ -12,8 +12,8 @@
   angular.module('chat')
   .factory('chatService', chatService);
 
-  chatService.$inject = [ '$resource', '$timeout', 'ksocket' ];
-  function chatService($resource, $timeout, ksocket){
+  chatService.$inject = [ '$resource', '$timeout', 'mySocket' ];
+  function chatService($resource, $timeout, mySocket){
 
     console.log('add:', on);
 
@@ -53,11 +53,11 @@
       chatMessageSendError: [],
     };
 
-    ksocket.on('chatMessage', function(data){
+    mySocket.on('chatMessage', function(data){
       _emit('chatMessage', data);
     });
 
-    ksocket.on('chatMessageSent', function(data){
+    mySocket.on('chatMessageSent', function(data){
       if (messageBeingSent.messageClientId === data.messageClientId){
         //-- messageClientId is as expected, so,
         //   call client-provided callback
@@ -69,7 +69,7 @@
       }
     });
 
-    ksocket.on('chatMessageSendError', function(data){
+    mySocket.on('chatMessageSendError', function(data){
       if (messageBeingSent.messageClientId === data.messageClientId){
         //-- messageClientId is as expected, so,
         //   call client-provided callback
@@ -171,7 +171,7 @@
           messageClientId++;
 
           $timeout(function() {
-            ksocket.emit('chatMessage', messageBeingSent);
+            mySocket.emit('chatMessage', messageBeingSent);
           });
 
         }

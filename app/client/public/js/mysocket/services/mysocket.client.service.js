@@ -1,17 +1,18 @@
 'use strict';
 
 /**
- * Socket.io wrapper service for kamishy.
+ * Socket.io wrapper service.
+ *
  * Provides lazy loading: when the service in injected first time, the connection
  * will be established.
  */
 (function(){
 
-  angular.module('ksocket')
-  .factory('ksocket', ksocket);
+  angular.module('mySocket')
+  .factory('mySocket', mySocket);
 
-  ksocket.$inject = [ '$timeout', 'authenticator' ];
-  function ksocket($timeout, authenticator){
+  mySocket.$inject = [ '$timeout', 'authenticator' ];
+  function mySocket($timeout, authenticator){
 
     var _socket = null;
 
@@ -46,7 +47,7 @@
       }
     });
 
-    console.log('ksocket loaded');
+    console.log('mySocket loaded');
 
     return {
       on: on,

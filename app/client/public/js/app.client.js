@@ -11,8 +11,8 @@
     'luegg.directives'
   ]);
   angular.module('users', ['ngResource', 'ngCookies']);
-  angular.module('ksocket', []);
-  angular.module('chat', ['ksocket']);
+  angular.module('mySocket', []);
+  angular.module('chat', ['mySocket']);
 
 })();
 

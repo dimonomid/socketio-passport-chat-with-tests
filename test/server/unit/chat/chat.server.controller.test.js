@@ -215,8 +215,15 @@
    */
   function _socketConnectUser(userData, checkDone) {
     userData.socket = io(
-      socketUrl + '?session_id=' + userData.sessionId,
-      options
+      socketUrl,
+      {
+        transports: ['websocket'],
+        autoConnect: true,//false,
+        forceNew: true,
+
+        //-- pass session_id as a query parameter
+        query: 'session_id=' + userData.sessionId
+      }
     );
 
     userData.socket.on('connect', function (data) {
