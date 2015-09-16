@@ -7,8 +7,8 @@
 
 
 
-  ChatPostController.$inject = [ '$scope', 'chatService' ];
-  function ChatPostController($scope, chatService){
+  ChatPostController.$inject = [ '$scope', 'chatService', 'authenticator' ];
+  function ChatPostController($scope, chatService, authenticator){
     var vm = this;
 
     chatService.on('chatMessageSent', onMessageSent);
@@ -20,6 +20,12 @@
       chatService.removeListener('chatMessageSendError', onMessageSendError);
     });
 
+    vm.currentUser = '';
+
+    authenticator.getCurrentUser()
+    .then(function(user){
+      vm.currentUser = user;
+    });
 
     //-- text of new message (entered by user)
     vm.newMessageText = '';

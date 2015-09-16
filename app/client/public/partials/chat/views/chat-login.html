@@ -1,5 +1,3 @@
-<h1>Login</h1>
-<hr/>
 
 <form name="loginForm" ng-submit="vm.submit()" class="form">
 
@@ -8,8 +6,6 @@
    </div>
 
    <div class="form-group">
-      <label for="usernameField">Username</label>
-
       <input
             type="text"
             name="usernameField"
@@ -20,17 +16,9 @@
             autofocus
             required>
 
-      <div  ng-messages="loginForm.usernameField.$error"
-            ng-if="loginForm.usernameField.$touched"
-            class="text-error">
-
-         <div ng-message="required">This field is required</div>
-      </div>
    </div>
 
    <div class="form-group">
-      <label for="passwordField">Password</label>
-
       <input
             type="password"
             name="passwordField"
@@ -40,14 +28,6 @@
             class="form-control"
             required
             >
-
-      <div  ng-messages="loginForm.passwordField.$error"
-            ng-if="loginForm.passwordField.$touched"
-            class="text-error"
-            >
-
-         <div ng-message="required">This field is required</div>
-      </div>
    </div>
 
    <div class="form-group">
@@ -55,7 +35,7 @@
             type="submit"
             class="btn btn-primary"
             ng-disabled="loginForm.$invalid">
-         submit
+         login
       </button>
    </div>
 </form>
