@@ -244,6 +244,14 @@
     });
   }
 
+  /**
+   * Try to broadcast messages, and check the following:
+   *
+   *   - Messages from logged-in users are broadcasted
+   *   - Messages from non-logged-in users are NOT broadcasted
+   *   - Users get notified about whether or not message
+   *     sending was successful
+   */
   function _tryBroadcastMessages(user2LoggedIn) {
     it("Should broadcast messages", function(done) {
       var chatMessage = {
