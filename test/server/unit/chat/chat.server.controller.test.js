@@ -27,21 +27,15 @@
 
 
 
-  var sessionId;
-
-
-
-  var testUser1;
-  var testUser1Id;
-
   var testUser1Username = 'user1';
   var testUser1Password = 'mypassword';
-
-  var testUser2;
-  var testUser2Id;
+  var testUser1Id;  //-- will be set when user is created
+  var testUser1;    //-- will be set when user is created
 
   var testUser2Username = 'user2';
   var testUser2Password = 'mypassword';
+  var testUser2;    //-- will be set when user is created
+  var testUser2Id;  //-- will be set when user is created
 
   var userData1 = {
     agent: request.agent(app),
@@ -185,6 +179,13 @@
 
 
 
+  /**
+   * @private
+   *
+   * Called when user is logged in.
+   *
+   * Remembers session id for this particular user.
+   */
   function _agentLoginCallback(res, done, userData) {
     var accessInfo = new cookiejar.CookieAccessInfo();
 
@@ -208,6 +209,10 @@
     done();
   }
 
+  /**
+   * Opens socket connection for particular user, taking in account
+   * session id (needed for passport.socketio)
+   */
   function _socketConnectUser(userData, checkDone) {
     userData.socket = io(
       socketUrl + '?session_id=' + userData.sessionId,
@@ -220,12 +225,19 @@
     });
   }
 
+  /**
+   * For all users, establish socket connection
+   */
   function _socketConnectAll() {
     it("Should connect to socket", function(done) {
       //-- open socket
       _socketConnectUser(userData1, checkDone);
       _socketConnectUser(userData2, checkDone);
 
+      /*
+       * Called after each socket connection. If all users
+       * are connected, call `done()`
+       */
       function checkDone(){
         if (userData1.connected && userData2.connected){
           done();
@@ -234,6 +246,9 @@
     });
   }
 
+  /**
+   * Disconnect all users' sockets
+   */
   function _socketDisonnectAll() {
     it("Should disconnect", function(done) {
 
@@ -345,6 +360,10 @@
     });
   }
 
+  /**
+   * Reset user data: session ids, message statistics, etc.
+   * Called before test series.
+   */
   function _resetUserDataAll() {
 
     userData1.sessionId = null;
