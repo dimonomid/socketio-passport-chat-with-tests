@@ -1,0 +1,4 @@
+/.vimprj/tags
+/.vimprj/*_tags
+/node_modules
+/bower_components
