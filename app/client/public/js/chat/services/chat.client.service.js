@@ -99,7 +99,7 @@
      * @param {Object} queryData
      *    Object that can contain various keys to narrow
      *    query.
-     *    See chat.server.controller.js, exports.query
+     *    See chat.server.controller.js, expressQuery
      *    function, for details on these keys.
      */
     function find(queryData){

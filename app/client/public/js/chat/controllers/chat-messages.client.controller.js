@@ -14,7 +14,9 @@
     //-- array of chat messages. Will be filled later by
     //   loadNextPage() calls, which will be made by
     //   infinite scroll.
-    vm.messages = [];
+    $scope.messages = chatService.find({
+      limit: 10
+    });
 
     //-- when new chat message arrives, add it to our array
     chatService.on('chatMessage', onNewMessage);
@@ -48,7 +50,7 @@
      * Called when chatService receives new chat message
      */
     function onNewMessage(message) {
-      vm.messages.push(message);
+      $scope.messages.push(message);
     }
 
   }
