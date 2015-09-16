@@ -12,18 +12,26 @@
 
     $stateProvider
     .state('chat', {
-      abstract: true,
       url: '/chat',
-      templateUrl: 'partials/chat/chat.html'
+      templateUrl: 'partials/chat/chat.html',
     })
-    .state('chat.login', {
-      url: '/login',
+    .state('chat.chatControlAbstract', {
+      abstract: true,
       views: {
-        chat: {
+        'chat': {
           templateUrl: 'partials/chat/views/chat-messages.html',
           controller: 'ChatMessagesController as vm',
         },
-        control: {
+
+        'control': {
+          template: '<div ui-view="actualControl"></div>',
+        }
+      }
+    })
+    .state('chat.chatControlAbstract.login', {
+      url: '/login',
+      views: {
+        'actualControl': {
           templateUrl: 'partials/chat/views/chat-login.html',
           controller: 'LoginController as vm'
         },
@@ -33,14 +41,10 @@
         authCheck: resolveIfNotAuthenticated
       }
     })
-    .state('chat.register', {
+    .state('chat.chatControlAbstract.register', {
       url: '/register',
       views: {
-        chat: {
-          templateUrl: 'partials/chat/views/chat-messages.html',
-          controller: 'ChatMessagesController as vm',
-        },
-        control: {
+        'actualControl': {
           templateUrl: 'partials/chat/views/chat-register.html',
           controller: 'RegisterController as vm'
         },
@@ -50,14 +54,10 @@
         authCheck: resolveIfNotAuthenticated
       }
     })
-    .state('chat.main', {
+    .state('chat.chatControlAbstract.main', {
       url: '/main',
       views: {
-        chat: {
-          templateUrl: 'partials/chat/views/chat-messages.html',
-          controller: 'ChatMessagesController as vm',
-        },
-        control: {
+        'actualControl': {
           templateUrl: 'partials/chat/views/chat-post.html',
           controller: 'ChatPostController as vm'
         },
@@ -67,14 +67,10 @@
         authCheck: resolveIfAuthenticated
       }
     })
-    .state('chat.logout', {
+    .state('chat.chatControlAbstract.logout', {
       url: '/logout',
       views: {
-        chat: {
-          templateUrl: 'partials/chat/views/chat-messages.html',
-          controller: 'ChatMessagesController as vm',
-        },
-        control: {
+        'actualControl': {
           controller: 'LogoutController as vm'
         },
       },
@@ -104,7 +100,7 @@
         deferred.resolve();
       } else {
         deferred.reject();
-        $state.go('chat.login');
+        $state.go('chat.chatControlAbstract.login');
       }
     })
     .catch(function(){
@@ -130,7 +126,7 @@
         deferred.resolve();
       } else {
         deferred.reject();
-        $state.go('chat.main');
+        $state.go('chat.chatControlAbstract.main');
       }
     })
     .catch(function(){

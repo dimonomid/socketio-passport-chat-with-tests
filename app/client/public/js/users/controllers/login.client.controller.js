@@ -24,7 +24,7 @@
       )
       .then(function(){
         console.log('auth succeed');
-        $state.go('chat.main');
+        $state.go('chat.chatControlAbstract.main');
       })
       .catch(function(){
         //console.log('error');

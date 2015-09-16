@@ -12,7 +12,7 @@
     authenticator.logout()
     .then(function(){
       console.log('logout succeed');
-      $state.go('chat.login');
+      $state.go('chat.chatControlAbstract.login');
     })
     .catch(function(){
       //console.log('error');
