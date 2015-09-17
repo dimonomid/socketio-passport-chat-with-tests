@@ -19,11 +19,6 @@
   var socketUrl = 'http://localhost:' + config.express.port;
   debug('url:', socketUrl);
 
-  var options = {
-    transports: ['websocket'],
-    autoConnect: true,//false,
-    forceNew: true,
-  };
 
 
 
@@ -37,6 +32,11 @@
   var testUser2;    //-- will be set when user is created
   var testUser2Id;  //-- will be set when user is created
 
+  //-- some user data that will be collected during tests.
+  //   Right now, it just contains agent returned by supertest.
+  //
+  //   We need for this agent in order to keep cookies.
+  //   Of course, each user has its own agent.
   var userData1 = {
     agent: request.agent(app),
   };
@@ -221,7 +221,8 @@
         autoConnect: true,//false,
         forceNew: true,
 
-        //-- pass session_id as a query parameter
+        //-- Crucial thing: pass session_id as a query parameter
+        //   to passport.socketio
         query: 'session_id=' + userData.sessionId
       }
     );
@@ -276,12 +277,17 @@
    */
   function _tryBroadcastMessages(user2LoggedIn) {
     it("Should broadcast messages", function(done) {
+
+      //-- message that we're going to send by different users
       var chatMessage = {
         text:             'hello',
         messageClientId:  123,
       };
-      //var messages = 0;
 
+      /*
+       * Subscribe on chat events: when something happens,
+       * update user's statistics.
+       */
       var subscribeOnChatMessage = function(userData){
 
         //-- new chat message received
@@ -306,7 +312,7 @@
 
           data.messageClientId.should.equal(chatMessage.messageClientId);
 
-          //-- remember sent message
+          //-- remember failed message
           userData.messagesFailed.push(data);
         });
       };
@@ -315,12 +321,15 @@
       subscribeOnChatMessage(userData1);
       subscribeOnChatMessage(userData2);
 
-      //-- make users to send some messages
+      //-- send some messages by users:
       userData1.socket.emit('chatMessage', chatMessage);
       userData1.socket.emit('chatMessage', chatMessage);
+
       userData2.socket.emit('chatMessage', chatMessage);
 
-      //-- Note: we ue setTimeout here intead of checking current numbers
+      //-- After some time (100 ms), check user statistics.
+      //
+      //   Note: we use setTimeout here intead of checking current numbers
       //   every time socket event is received, because it would not
       //   catch the error if we get more events than expected.
       //

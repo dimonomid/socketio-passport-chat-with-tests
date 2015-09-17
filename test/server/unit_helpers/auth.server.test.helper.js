@@ -1,5 +1,26 @@
 'use strict';
 
+/**
+ * Perform user login.
+ *
+ * @param {Object} agent
+ *    Agent instance returned by supertest.agent(app)
+ * @param {String} username
+ * @param {String} password
+ * @param {Function} callback
+ *    Optional.
+ *    If provided, this callback is called when authentication is successful.
+ *    It takes 3 arguments:
+ *
+ *      - res: express's response
+ *      - done: callback that must be called when callback is finished
+ *        its job
+ *      - cbData: arbitrary user data provided as next argument
+ *
+ * @param {Mixed} cbData
+ *    Optional.
+ *    Arbitrary user data that is given to callback
+ */
 module.exports.agentLogin = function(agent, username, password, callback, cbData) {
   it('Should log in as ' + username, function(done){
     agent
@@ -32,6 +53,12 @@ module.exports.agentLogin = function(agent, username, password, callback, cbData
   });
 }
 
+/**
+ * Perform user logout.
+ *
+ * @param {Object} agent
+ *    Agent instance returned by supertest.agent(app)
+ */
 module.exports.agentLogout = function(agent) {
   it('Should log out', function(done){
     agent
