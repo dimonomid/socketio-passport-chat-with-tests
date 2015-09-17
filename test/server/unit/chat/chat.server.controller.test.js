@@ -274,6 +274,11 @@
    *   - Messages from non-logged-in users are NOT broadcasted
    *   - Users get notified about whether or not message
    *     sending was successful
+   *
+   * @param {Boolean} user2LoggedIn
+   *    This argument affects statistic expectations: if user2 is logged in,
+   *    then it should be able to post messages; otherwise, it shouldn't.
+   *
    */
   function _tryBroadcastMessages(user2LoggedIn) {
     it("Should broadcast messages", function(done) {
